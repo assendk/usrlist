@@ -103,6 +103,11 @@ class DataController extends Controller
         return view('users',compact('users'));
     }
 
+    public function sort($data) {
+        $this->displayData($data);
+        return view('users',compact('users'));
+    }
+
     public function search()
     {
         $q = Input::get('q');
@@ -114,8 +119,12 @@ class DataController extends Controller
             $users->appends([
                'q' =>  Input::get('q')
             ]);
+
+//            dd($users);
+
             if(count($users) > 0){
                 return view('users',compact('users'));
+//                return route('users',compact('users'));
             }
             $msg = ['error' => 'No result!',
                 ];
