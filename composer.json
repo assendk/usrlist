@@ -57,5 +57,8 @@
         "optimize-autoloader": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "dependencies": {
+        "js-yaml": ">=3.13.1"
+    }
 }

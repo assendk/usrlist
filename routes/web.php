@@ -19,6 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get ( '/data', 'DataController@listData' );
-
-Route::get('/datatbl','DataController@displayData');
+Route::get('/users','DataController@displayData')->name('users');
+Route::any('/search', 'DataController@search');

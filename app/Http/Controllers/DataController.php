@@ -6,9 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use App\Data;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class DataController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -85,15 +91,40 @@ class DataController extends Controller
         //
     }
 
-    public function listData(){
-//        $data = Data::all()->paginate(5);
-        $data = Data::paginate(5);
-        return view ( 'data', compact('data') );
-    }
+//    public function listData(){
+////        $data = Data::all()->paginate(5);
+//        $data = Data::paginate(5);
+//        return view ( 'data', compact('data') );
+//    }
 
     public function displayData()
     {
-        $datas = Data::sortable()->paginate(5);
-        return view('datatbl',compact('datas'));
+        $users = Data::sortable()->paginate(10);
+        return view('users',compact('users'));
+    }
+
+    public function search()
+    {
+        $q = Input::get('q');
+        if ($q != ''){
+            $users = Data::where('name', 'LIKE', '%'. $q .'%')
+                ->orWhere('email', 'LIKE', '%'. $q .'%')
+                ->paginate(5)
+                ->setpath('');
+            $users->appends([
+               'q' =>  Input::get('q')
+            ]);
+            if(count($users) > 0){
+                return view('users',compact('users'));
+            }
+            $msg = ['error' => 'No result!',
+                ];
+
+            return redirect()->route('users')->with($msg);
+        }
+        $msg = ['error' => 'Emptry Request!',
+        ];
+        return redirect()->route('users')->with($msg);
+
     }
 }
