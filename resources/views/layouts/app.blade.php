@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+{{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -19,6 +19,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link href="/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/js/dataTables.bootstrap4.min.js"></script>
     @yield('headscripts')
 </head>
 <body>
@@ -36,6 +42,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
+                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -49,7 +56,10 @@
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link"  href="{{ route('home') }}">{{ __('Users List') }}</a>
+                                <a class="nav-link"  href="{{ route('displaydata') }}">{{ __('Users List 1') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"  href="{{ route('users') }}">{{ __('Users List 2') }}</a>
                             </li>
 
                             <li class="nav-item">
@@ -79,6 +89,17 @@
                             <li class="nav-item">
                                 <img style="width: 24px; height: auto; max-height: 24px"
                                      class="rounded-circle" src="/avatars/{{  Auth::user()->avatar }}"/>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </li>
                         @endguest
                     </ul>

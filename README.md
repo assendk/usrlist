@@ -8,3 +8,8 @@ used Laravel 5.6
 5. set permissions to www-data
 6. php artisan tinker
 7. factory(App\User::class, 100)->create(); // or 5000
+
+#TODO
+- validation with old password on change
+- upload profile pics via ajax/vue 
+- repair logout

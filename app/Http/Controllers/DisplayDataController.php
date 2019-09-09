@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
+use Yajra\DataTables\DataTables;
+use App\User;
 use Illuminate\Support\Facades\Auth;
-use App\Data;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Redirect;
 
-class DataController extends Controller
+class DisplayDataController extends Controller
 {
     public function __construct()
     {
@@ -22,7 +20,7 @@ class DataController extends Controller
      */
     public function index()
     {
-
+        return Datatables::of(User::query())->make(true);
     }
 
     /**
@@ -30,9 +28,10 @@ class DataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function displaydata()
     {
-        return view('datatbl');
+
+        return view('displaydata');
     }
 
     /**
@@ -89,51 +88,5 @@ class DataController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-//    public function listData(){
-////        $data = Data::all()->paginate(5);
-//        $data = Data::paginate(5);
-//        return view ( 'data', compact('data') );
-//    }
-
-    public function displayData()
-    {
-        $users = Data::sortable()->paginate(5);
-        return view('users',compact('users'));
-    }
-
-    public function sort($data) {
-        $this->displayData($data);
-        return view('users',compact('users'));
-    }
-
-    public function search()
-    {
-        $q = Input::get('q');
-        if ($q != ''){
-            $users = Data::where('name', 'LIKE', '%'. $q .'%')
-                ->orWhere('email', 'LIKE', '%'. $q .'%')
-                ->paginate(5)
-                ->setpath('');
-            $users->appends([
-               'q' =>  Input::get('q')
-            ]);
-
-//            dd($users);
-
-            if(count($users) > 0){
-                return view('users',compact('users'));
-//                return route('users',compact('users'));
-            }
-            $msg = ['error' => 'No result!',
-                ];
-
-            return redirect()->route('users')->with($msg);
-        }
-        $msg = ['error' => 'Emptry Request!',
-        ];
-        return redirect()->route('users')->with($msg);
-
     }
 }

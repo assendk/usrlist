@@ -9,8 +9,6 @@
 @section('content')
 <div class="container">
     <div class="row">
-
-
         <div class="col-lg-4 col-md-4">
             <div class="container">
                 @if($errors)
@@ -34,7 +32,7 @@
                     </div>
 
                 </div>
-                <div class="row justify-content-center">
+                <div class="align-content-center">
                     <form action="/profile-pic" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
