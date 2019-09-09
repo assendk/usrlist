@@ -13,8 +13,8 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-
+                    <p>Use this command to populate `users` table with 100 random users</p>
+                    <code>php artisan db:seed --class=UsersTableSeeder</code>
 
                 </div>
             </div>
