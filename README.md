@@ -7,8 +7,8 @@ used Laravel 5.6
 3. set .env connection to DB (CREATE DATABASE `usrlist` /*!40100 COLLATE 'utf8mb4_unicode_ci' */) + username + pass
 4. php artisan migrate
 5. set Owner to www-data
-6. php artisan tinker
-7. factory(App\User::class, 100)->create(); // or 5000 or (pass: secret)
+6. php artisan tinker + factory(App\User::class, 100)->create();
+7.  (pass: secret)
 8. php artisan db:seed --class=UsersTableSeeder
 
 
