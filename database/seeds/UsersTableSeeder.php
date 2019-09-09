@@ -1,7 +1,8 @@
 <?php
 
-use App\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,7 +14,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
 
-        // $this->call(UsersTableSeeder::class);
+        $faker = Faker\Factory::create();
+
         for($i = 0; $i < 100; $i++) {
             App\User::create([
                 'name' => $faker->firstName,
